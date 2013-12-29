@@ -1,12 +1,16 @@
 require 'rubygems'
-require 'sinatra'
+require 'sinatra/base'
 require 'sinatra/reloader'
 
-get '/' do
-  erb :index 
+class App < Sinatra::Base
+  get '/' do
+    erb :index 
+  end
+
+  get '/get' do
+    @artist = @params[:artist]
+    erb :result
+  end
 end
 
-get '/get' do
-  @artist = @params[:artist]
-  erb :result
-end
+App.run!
