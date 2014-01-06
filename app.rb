@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'sinatra/reloader'
-require './lib/getArtist.rb'
+require './lib/HoundCloud.rb'
 
 class App < Sinatra::Base
   get '/' do
@@ -10,12 +10,15 @@ class App < Sinatra::Base
 
   get '/get' do
     @artist = @params[:artist]
-    @tracks = getArtist(@params[:artist])
+    @tracks = HoundCloud.getArtist(@params[:artist])
     erb :result
   end
 
-  get 'auth' do
+  post '/auth' do
+    redirect HoundCloud.scAuth
   end
 end
 
-App.run!
+if __FILE__ == $0
+  App.run!
+end
