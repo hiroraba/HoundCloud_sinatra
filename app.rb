@@ -18,7 +18,3 @@ class App < Sinatra::Base
     redirect HoundCloud.scAuth
   end
 end
-
-if __FILE__ == $0
-  App.run!
-end
