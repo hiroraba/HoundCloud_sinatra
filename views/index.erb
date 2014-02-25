@@ -1,12 +1,10 @@
 <%= erb :"shared/header" %>
-<h1>SoundHound</h1>
-<form action="/get" method="get">
-  <input type="text" name="artist">
-  </br>
-  <input type="submit" class="btn btn-primary">
-</form>
-</br>
-<form action="/auth" method="post">
-  <input type="image" src ="http://connect.soundcloud.com/2/btn-connect-sc-l.png">
-</form>
+<div class="logo">
+  HoundCloud
+</div>
+<div class="auth">
+  <form action="/auth/soundcloud" method="get">
+    <input type="image" src ="http://connect.soundcloud.com/2/btn-connect-sc-l.png">
+  </form>
+</div>
 <%= erb :"shared/footer" %>
