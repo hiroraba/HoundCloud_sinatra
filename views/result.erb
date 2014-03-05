@@ -1,7 +1,6 @@
 <%= erb :"shared/header" %>
 <h1>This results based on <%= @artist %></h1>
 <% @tracks.each do |track| %>
-  <a href="/<%= track.id  %>"><%= track.id %></a>
   <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=<%= track.permalink_url %>"></iframe>
 <% end %>
 <%= erb :"shared/footer" %>
