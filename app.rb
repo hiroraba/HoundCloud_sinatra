@@ -2,13 +2,12 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
-require './lib/HoundCloud.rb'
 
 require 'soundcloud'
 require 'omniauth'
 require 'omniauth-soundcloud'
 
-class App < Sinatra::Base
+class Houndcloud < Sinatra::Base
 
   configure do
     enable :sessions
@@ -26,8 +25,7 @@ class App < Sinatra::Base
   get '/get' do
     resession
     @client = Soundcloud.new(:access_token => session[:token])
-    @artist = @params[:artist]
-    @tracks = @client.get('/tracks', :limit => 10, :order => 'hotness', :q => @artist)
+    @tracks = @client.get('/tracks', :limit => 10, :order => 'hotness', :q => @params[:artist])
     erb :result
   end
 
@@ -39,13 +37,16 @@ class App < Sinatra::Base
 
   get '/:id' do
     resession
-    id = params[:id]
     @client = Soundcloud.new(:access_token => session[:token])
     playlist = @client.get('/me/playlists').first
     track_ids = playlist.tracks.map(&:id)
-    track_ids << trackid
+    track_ids << @params[:id]
     tracks = track_ids.map{|id| {:id => id}}
     playlist = @client.put(playlist.uri, :playlist => {:tracks => tracks })
+  end
+
+  error do
+    erb :error
   end
 
   def resession

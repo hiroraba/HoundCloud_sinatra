@@ -2,7 +2,7 @@ require 'json'
 require 'net/https'
 require 'soundcloud'
 
-class HoundCloud
+module Houndcloud
   def initialize(token)
     @client = Soundcloud.new(:access_token => token)
   end

@@ -2,6 +2,14 @@
 <div class="logo">
   HoundCloud
 </div>
+<% unless session[:token].nil? %>
+<div class="get">
+  <form action="/get" method="get">
+    <input type="text" name="artist">
+    <input type="submit">
+  </form>
+</div>
+<% end %>
 <div class="auth">
   <form action="/auth/soundcloud" method="get">
     <input type="image" src ="http://connect.soundcloud.com/2/btn-connect-sc-l.png">
