@@ -3,11 +3,15 @@
   HoundCloud
 </div>
 <% unless session[:token].nil? %>
-<div class="get">
-  <form action="/get" method="get">
-    <input type="text" name="artist">
-    <input type="submit">
-  </form>
+  <div class="form">  
+<form action="/get" method="get" class="well form-inline" role="search">
+  <div class="form-group">
+    <div class="get">
+      <input type="text" class="form-control" placeholder="Input Artist" name="artist">
+      <button type="submit" class="btn btn-default">Search</button>
+    </div>
+  </div>
+</form>
 </div>
 <% end %>
 <div class="auth">

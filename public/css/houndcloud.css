@@ -2,17 +2,22 @@ body {
   padding-top:70px;
 }
 
-.logo {
+body .logo {
   text-align:center;
   font-family: 'Varela Round', sans-serif;
   font-size:70px; 
   height:80px;
 }
 
+.form {
+  text-align:center;
+  padding-bottom: 30px;
+}
+
 .error {
   text-align:center;
 }
 
-.auth{
+body .auth{
   text-align:center;
 }
