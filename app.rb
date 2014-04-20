@@ -24,8 +24,8 @@ class Houndcloud < Sinatra::Base
 
   get '/get' do
     resession
-    @client = Soundcloud.new(:access_token => session[:token])
-    @tracks = @client.get('/tracks', :limit => 10, :order => 'hotness', :q => @params[:artist])
+    @@client = Soundcloud.new(:access_token => session[:token])
+    @tracks = @@client.get('/tracks', :limit => 10, :order => 'hotness', :q => @params[:artist])
     erb :result
   end
 
@@ -35,18 +35,17 @@ class Houndcloud < Sinatra::Base
     redirect "/"
   end
 
-  get '/:id' do
+  get '/add/:id' do
     resession
-    @client = Soundcloud.new(:access_token => session[:token])
-    playlist = @client.get('/me/playlists').first
+    playlist = @@client.get('/me/playlists').first
     track_ids = playlist.tracks.map(&:id)
     track_ids << @params[:id]
     tracks = track_ids.map{|id| {:id => id}}
-    playlist = @client.put(playlist.uri, :playlist => {:tracks => tracks })
+    playlist = @@client.put(playlist.uri, :playlist => {:tracks => tracks })
   end
 
-  error do
-    erb :error
+  not_found do
+      "Whoops! You requested a route that wasn't available."
   end
 
   def resession
