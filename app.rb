@@ -2,12 +2,15 @@ require 'rubygems'
 require 'sinatra'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/static_assets'
 
 require 'soundcloud'
 require 'omniauth'
 require 'omniauth-soundcloud'
 
 class Houndcloud < Sinatra::Base
+
+  register Sinatra::StaticAssets
 
   configure do
     enable :sessions
@@ -45,7 +48,7 @@ class Houndcloud < Sinatra::Base
   end
 
   not_found do
-      "Whoops! You requested a route that wasn't available."
+    "Whoops! You requested a route that wasn't available."
   end
 
   def resession
